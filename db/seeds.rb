@@ -17,3 +17,50 @@ authors = [
   Sjoerd Volleberg was a law professor at the open university op Beek, located in the utter south of Limburg, a neglected province in the Netherlands
   }],
 ]
+
+authors.each do | name, country, bio |
+   Author.create( name: name, country: country, bio: bio )
+end
+
+
+author_novels = {}
+
+author_novels["Mark Twain"] = [
+
+   [ "The Adventures of Tom Sawyer",
+     1876, "http://csmt.cde.ca.gov/images/0030544610.jpg",
+     "Adventures of a young boy and his friends growing up in a small Missouri town on the banks of the Mississippi River in the nineteenth century."
+   ],
+
+   [ "A Connecticut Yankee in King Arthur's Court",
+     1889, "https://img1.etsystatic.com/000/0/6648867/il_fullxfull.333586431.jpg",
+     "A nineteenth-century American travels back in time to sixth-century England"
+   ],
+]
+
+
+author_novels["Ernest Hemmingway"] = [
+
+   [ "The Old Man and the Sea",
+     1952, "http://7summitsproject.com/wp-content/uploads/2015/06/old-man-and-the-sea-review.jpg",
+     "Old Cuban fisherman sails further out to sea than usual in attempt to better his luck."
+   ],
+
+   [ "A Farewell to Arms",
+     1929, "https://kuwwi.files.wordpress.com/2015/07/farewell-to-arms-people.jpg",
+     "Young American WW1 soldier in Italy is injured and cared for by English nurse's aide."
+   ],
+
+   [ "For Whom the Bell Tolls",
+     1940, "http://1.bp.blogspot.com/-hgJGEoU-cuw/Tz6t7RmvjqI/AAAAAAAACug/NFuuUzkTJc4/s1600/forwhom.jpg",
+     "American joins guerrillas in the Spanish Civil war."
+   ],
+]
+
+author_novels.each do | author_name, novels |
+   author = Author.find_by( name: author_name )
+
+   novels.each do | title, year, cover, plot |
+      Novel.create( title:title, author_id: author.id, year: year, cover: cover, plot: plot )
+   end
+end
